@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ===== FAVICON & TAB ===== -->
+    <title>FORGE — Elite Fitness Studio Lima</title>
+
+    <!-- Favicon SVG: "F" naranja sobre fondo oscuro -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230a0a0a'/%3E%3Crect x='8' y='8' width='84' height='84' rx='12' fill='%23141414' stroke='%23FF6B00' stroke-width='4'/%3E%3Ctext x='22' y='76' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='68' fill='%23FF6B00'%3EF%3C/text%3E%3C/svg%3E">
+
+    <!-- Favicon PNG fallback para navegadores viejos -->
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACJSURBYF7txcENwkAMREXFHxCnolfgJOgl6CVoJeglaMWq1ZgY3f1+sk2S5JD3+/tbHjf4B0ySJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEkSx3Kc5DvOLJ1nOS3HA/QB3+0cQH1muwAAAAASUVORK5CYII=">
+
+    <!-- Apple touch icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='32' fill='%230a0a0a'/%3E%3Crect x='12' y='12' width='156' height='156' rx='24' fill='%23141414' stroke='%23FF6B00' stroke-width='6'/%3E%3Ctext x='36' y='138' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='120' fill='%23FF6B00'%3EF%3C/text%3E%3C/svg%3E">
+
+    <!-- Color barra móvil Chrome/Safari -->
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FORGE Fitness">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FORGE — Elite Fitness Studio Lima. Entrenamiento de alto rendimiento, entrenadores certificados, programas personalizados. Reserva tu clase gratis por WhatsApp.">
+    <meta name="keywords" content="gym lima, fitness lima, entrenamiento personal, perder grasa, ganar musculo, forje fitness, gym miraflores, clase gratuita">
+    <meta name="author" content="FORGE Fitness Studio">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (Facebook/WhatsApp sharing) -->
+    <meta property="og:title" content="FORGE — Elite Fitness Studio Lima">
+    <meta property="og:description" content="Entrenamiento de alto rendimiento respaldado por ciencia. Reserva tu clase gratis por WhatsApp.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://forgefitness.pe">
+    <meta property="og:image" content="https://picsum.photos/seed/forge-og-share/1200/630.jpg">
+    <meta property="og:locale" content="es_PE">
+    <meta property="og:site_name" content="FORGE Fitness">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FORGE — Elite Fitness Studio Lima">
+    <meta name="twitter:description" content="Entrenamiento de alto rendimiento respaldado por ciencia. Reserva tu clase gratis por WhatsApp.">
+    <meta name="twitter:image" content="https://picsum.photos/seed/forge-og-share/1200/630.jpg">
+
+    <!-- ===== RESOURCES ===== -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neon: '#FF6B00',
+                        'neon-glow': '#FF8533',
+                        silver: '#C0C0C0',
+                        'silver-light': '#E8E8E8',
+                    },
+                    fontFamily: {
+                        heading: ['Oswald', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-heading { font-family: 'Oswald', sans-serif; }
+
+        #grainOverlay {
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            will-change: transform;
+        }
+
+        @keyframes pulseNeon {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.5); }
+            50% { box-shadow: 0 0 25px 5px rgba(255, 107, 0, 0.15); }
+        }
+        .pulse-cta { animation: pulseNeon 2.5s ease-in-out infinite; }
+
+        .flip-card { perspective: 1200px; }
+        .flip-card-inner {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner,
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .flip-card-back { transform: rotateY(180deg); }
+
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .reveal-item.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carousel-track {
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .carousel-track:active { cursor: grabbing; }
+        .carousel-track.dragging { transition: none !important; }
+
+        #heroVideo { filter: grayscale(100%) contrast(1.3) brightness(0.45); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        .mobile-menu-open { transform: translateX(0) !important; }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,107,0,0.3), transparent, rgba(255,107,0,0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .program-card:hover::before { opacity: 1; }
+
+        .toast {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-[#0a0a0a] text-white font-body overflow-x-hidden">
+
+    <!-- Grain Texture Overlay -->
+    <div id="grainOverlay" class="fixed inset-0 pointer-events-none z-[100] opacity-[0.035]"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="font-heading text-2xl font-bold tracking-widest text-neon">FORGE</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#programs" class="text-xs font-semibold tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Programas</a>
+                <a href="#trainers" class="text-xs font-semibold tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Entrenadores</a>
+                <a href="#stories" class="text-xs font-semibold tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Historias</a>
+                <a href="#booking" class="bg-neon text-black text-xs font-bold uppercase tracking-widest px-6 py-2.5 rounded hover:bg-neon-glow transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Clase por WhatsApp
+                </a>
+            </div>
+            <button id="menuBtn" class="md:hidden text-white"><i data-lucide="menu" class="w-6 h-6"></i></button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-[60] bg-[#0a0a0a] flex flex-col items-center justify-center gap-8 transform translate-x-full transition-transform duration-300">
+        <button id="closeMenuBtn" class="absolute top-5 right-5 text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+        <a href="#programs" class="mobile-link text-2xl font-heading text-white uppercase tracking-wider">Programas</a>
+        <a href="#trainers" class="mobile-link text-2xl font-heading text-white uppercase tracking-wider">Entrenadores</a>
+        <a href="#stories" class="mobile-link text-2xl font-heading text-white uppercase tracking-wider">Historias</a>
+        <a href="#booking" class="mobile-link bg-neon text-black font-heading text-lg px-8 py-3 rounded flex items-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Clase por WhatsApp
+        </a>
+    </div>
+
+    <!-- ==================== HERO ==================== -->
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <video id="heroVideo" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"
+               poster="https://picsum.photos/seed/forge-hero-bw/1920/1080.jpg">
+            <source src="https://videos.pexels.com/video-files/852395/852395-hd_1920_1080_30fps.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/70 via-[#0a0a0a]/30 to-[#0a0a0a]"></div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <div class="inline-block mb-6 px-4 py-1.5 border border-neon/30 rounded-full">
+                <span class="text-neon text-[10px] font-semibold tracking-[0.2em] uppercase">Elite Fitness Studio — Lima</span>
+            </div>
+            <h1 class="font-heading text-5xl md:text-7xl lg:text-[6.5rem] font-bold uppercase tracking-tight leading-[0.85] mb-6">
+                Forja Tu<br><span class="text-neon">Mejor Versión</span>
+            </h1>
+            <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto mb-10 leading-relaxed">
+                Entrenamiento de alto rendimiento respaldado por ciencia. Comunidad que impulsa resultados. No es un gimnasio, es una forja.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#booking" class="pulse-cta bg-neon text-black font-heading text-sm font-bold uppercase tracking-wider px-8 py-4 rounded hover:bg-neon-glow transition-colors flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Reservar por WhatsApp
+                </a>
+                <a href="#programs" class="border border-white/20 text-white font-heading text-sm font-medium uppercase tracking-wider px-8 py-4 rounded hover:bg-white/5 transition-colors">
+                    Ver Programas
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevrons-down" class="w-5 h-5 text-gray-500"></i>
+        </div>
+    </section>
+
+    <!-- ==================== STATS BAR ==================== -->
+    <section class="relative bg-[#111] border-y border-white/5 py-6 md:py-8">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+            <div class="reveal-item">
+                <div class="font-heading text-3xl md:text-4xl font-bold text-neon" data-count="12">0</div>
+                <div class="text-[10px] text-gray-500 uppercase tracking-widest mt-1">Años de Experiencia</div>
+            </div>
+            <div class="reveal-item" style="transition-delay:0.1s">
+                <div class="font-heading text-3xl md:text-4xl font-bold text-white" data-count="5000">0</div>
+                <div class="text-[10px] text-gray-500 uppercase tracking-widest mt-1">Miembros Activos</div>
+            </div>
+            <div class="reveal-item" style="transition-delay:0.2s">
+                <div class="font-heading text-3xl md:text-4xl font-bold text-white" data-count="98">0</div>
+                <div class="text-[10px] text-gray-500 uppercase tracking-widest mt-1">% Satisfacción</div>
+            </div>
+            <div class="reveal-item" style="transition-delay:0.3s">
+                <div class="font-heading text-3xl md:text-4xl font-bold text-neon" data-count="24">0</div>
+                <div class="text-[10px] text-gray-500 uppercase tracking-widest mt-1">Entrenadores Certificados</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROGRAMS ==================== -->
+    <section id="programs" class="relative py-16 md:py-24 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="reveal-item mb-12 md:mb-16">
+                <span class="text-neon text-[10px] font-semibold tracking-[0.2em] uppercase">Entrenamiento con Propósito</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold uppercase tracking-tight mt-2">Programas por Objetivo</h2>
+                <p class="text-gray-500 text-sm mt-3 max-w-xl">Cada programa está diseñado con periodización científica, nutrición integrada y seguimiento de métricas reales.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="reveal-item program-card relative bg-[#141414] rounded-xl p-6 md:p-8 border border-white/5 hover:border-neon/20 transition-all duration-500 group overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-neon/5 rounded-full blur-3xl group-hover:bg-neon/10 transition-colors duration-700"></div>
+                    <div class="relative">
+                        <div class="w-12 h-12 rounded-lg bg-neon/10 flex items-center justify-center mb-5">
+                            <i data-lucide="dumbbell" class="w-6 h-6 text-neon"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold uppercase tracking-wide mb-3">Ganancia Muscular</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed mb-5">Hipertrofia progresiva con periodización lineal. De 3 a 5 sesiones semanales con volumen y carga optimizados.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Fuerza progresiva compensada</li>
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Plan nutrición proteico</li>
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Seguimiento composición corporal</li>
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Suplementación estratégica</li>
+                        </ul>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon font-heading text-2xl font-bold">S/349<span class="text-xs text-gray-500 font-body font-normal">/mes</span></span>
+                            <a href="#booking" class="text-xs font-semibold uppercase tracking-wider text-white border border-white/20 px-4 py-2 rounded hover:bg-white/5 transition-colors">Inscribirse</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-item program-card relative bg-[#141414] rounded-xl p-6 md:p-8 border border-neon/20 transition-all duration-500 group overflow-hidden" style="transition-delay:0.1s">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-neon/10 rounded-full blur-3xl group-hover:bg-neon/15 transition-colors duration-700"></div>
+                    <div class="absolute top-3 right-3 bg-neon text-black text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Popular</div>
+                    <div class="relative">
+                        <div class="w-12 h-12 rounded-lg bg-neon/10 flex items-center justify-center mb-5">
+                            <i data-lucide="flame" class="w-6 h-6 text-neon"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold uppercase tracking-wide mb-3">Pérdida de Grasa</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed mb-5">Combina HIIT, entrenamiento de resistencia y déficit calórico inteligente. Quema grasa preservando masa muscular.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>HIIT + Resistencia combinados</li>
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Déficit calórico calculado</li>
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Monitorización metabólica</li>
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Coaching de hábitos diarios</li>
+                        </ul>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon font-heading text-2xl font-bold">S/389<span class="text-xs text-gray-500 font-body font-normal">/mes</span></span>
+                            <a href="#booking" class="text-xs font-semibold uppercase tracking-wider text-black bg-neon px-4 py-2 rounded hover:bg-neon-glow transition-colors">Inscribirse</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-item program-card relative bg-[#141414] rounded-xl p-6 md:p-8 border border-white/5 hover:border-neon/20 transition-all duration-500 group overflow-hidden" style="transition-delay:0.2s">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-neon/5 rounded-full blur-3xl group-hover:bg-neon/10 transition-colors duration-700"></div>
+                    <div class="relative">
+                        <div class="w-12 h-12 rounded-lg bg-neon/10 flex items-center justify-center mb-5">
+                            <i data-lucide="heart-pulse" class="w-6 h-6 text-neon"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold uppercase tracking-wide mb-3">Fitness Integral</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed mb-5">Programa completo de condición física: fuerza, resistencia, flexibilidad y bienestar mental. Equilibrio total.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Entrenamiento funcional variado</li>
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Movilidad y recuperación</li>
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Nutrición equilibrada</li>
+                            <li class="flex items-center gap-2 text-xs text-gray-400"><i data-lucide="check" class="w-3.5 h-3.5 text-neon"></i>Bienestar mental integrado</li>
+                        </ul>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon font-heading text-2xl font-bold">S/299<span class="text-xs text-gray-500 font-body font-normal">/mes</span></span>
+                            <a href="#booking" class="text-xs font-semibold uppercase tracking-wider text-white border border-white/20 px-4 py-2 rounded hover:bg-white/5 transition-colors">Inscribirse</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TRAINERS ==================== -->
+    <section id="trainers" class="relative py-16 md:py-24 bg-[#0e0e0e]">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="reveal-item mb-12 md:mb-16">
+                <span class="text-neon text-[10px] font-semibold tracking-[0.2em] uppercase">Equipo de Élite</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold uppercase tracking-tight mt-2">Nuestros Entrenadores</h2>
+                <p class="text-gray-500 text-sm mt-3 max-w-xl">Profesionales certificados con experiencia comprobada. Pasa el cursor sobre cada tarjeta para conocer sus credenciales.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="reveal-item flip-card h-[420px] rounded-xl cursor-pointer">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <div class="flip-card-front absolute inset-0 rounded-xl overflow-hidden">
+                            <img src="https://picsum.photos/seed/trainer-alex-vega/600/840.jpg" alt="Alejandro Vega" class="w-full h-full object-cover" style="filter: grayscale(100%) contrast(1.15);">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                <div class="text-neon text-[9px] font-bold tracking-widest uppercase mb-1">Strength & Conditioning</div>
+                                <h3 class="font-heading text-xl font-bold uppercase">Alejandro Vega</h3>
+                                <p class="text-gray-400 text-xs mt-1">12 años de experiencia</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back absolute inset-0 rounded-xl bg-[#1a1a1a] border border-neon/20 p-6 flex flex-col justify-center">
+                            <div class="text-neon text-[9px] font-bold tracking-widest uppercase mb-3">Alejandro Vega</div>
+                            <h4 class="font-heading text-lg font-bold uppercase mb-4">Certificaciones</h4>
+                            <ul class="space-y-2 mb-5">
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>CSCS — NSCA</li>
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>NASM-CPT</li>
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>FRCms — Mobility</li>
+                            </ul>
+                            <h4 class="font-heading text-lg font-bold uppercase mb-3">Entrenamiento Signature</h4>
+                            <div class="bg-[#222] rounded-lg p-3 border border-white/5">
+                                <span class="text-neon font-heading text-sm font-semibold">PowerForge Protocol</span>
+                                <p class="text-gray-500 text-[11px] mt-1">Fuerza máxima + hipertrofia funcional con periodización ondulada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-item flip-card h-[420px] rounded-xl cursor-pointer" style="transition-delay:0.1s">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <div class="flip-card-front absolute inset-0 rounded-xl overflow-hidden">
+                            <img src="https://picsum.photos/seed/trainer-maria-santos/600/840.jpg" alt="María Santos" class="w-full h-full object-cover" style="filter: grayscale(100%) contrast(1.15);">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                <div class="text-neon text-[9px] font-bold tracking-widest uppercase mb-1">HIIT & Performance</div>
+                                <h3 class="font-heading text-xl font-bold uppercase">María Santos</h3>
+                                <p class="text-gray-400 text-xs mt-1">8 años de experiencia</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back absolute inset-0 rounded-xl bg-[#1a1a1a] border border-neon/20 p-6 flex flex-col justify-center">
+                            <div class="text-neon text-[9px] font-bold tracking-widest uppercase mb-3">María Santos</div>
+                            <h4 class="font-heading text-lg font-bold uppercase mb-4">Certificaciones</h4>
+                            <ul class="space-y-2 mb-5">
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>ACE-CPT</li>
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>CrossFit Level 3</li>
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>Precision Nutrition L1</li>
+                            </ul>
+                            <h4 class="font-heading text-lg font-bold uppercase mb-3">Entrenamiento Signature</h4>
+                            <div class="bg-[#222] rounded-lg p-3 border border-white/5">
+                                <span class="text-neon font-heading text-sm font-semibold">Inferno Circuit</span>
+                                <p class="text-gray-500 text-[11px] mt-1">HIIT de alta intensidad con intervalos tabata y active recovery</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-item flip-card h-[420px] rounded-xl cursor-pointer" style="transition-delay:0.2s">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <div class="flip-card-front absolute inset-0 rounded-xl overflow-hidden">
+                            <img src="https://picsum.photos/seed/trainer-carlos-ruiz/600/840.jpg" alt="Carlos Ruiz" class="w-full h-full object-cover" style="filter: grayscale(100%) contrast(1.15);">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                <div class="text-neon text-[9px] font-bold tracking-widest uppercase mb-1">Functional Training</div>
+                                <h3 class="font-heading text-xl font-bold uppercase">Carlos Ruiz</h3>
+                                <p class="text-gray-400 text-xs mt-1">10 años de experiencia</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back absolute inset-0 rounded-xl bg-[#1a1a1a] border border-neon/20 p-6 flex flex-col justify-center">
+                            <div class="text-neon text-[9px] font-bold tracking-widest uppercase mb-3">Carlos Ruiz</div>
+                            <h4 class="font-heading text-lg font-bold uppercase mb-4">Certificaciones</h4>
+                            <ul class="space-y-2 mb-5">
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>NSCA-CSCS</li>
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>FMS Level 2</li>
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>TRX-STC Qualified</li>
+                            </ul>
+                            <h4 class="font-heading text-lg font-bold uppercase mb-3">Entrenamiento Signature</h4>
+                            <div class="bg-[#222] rounded-lg p-3 border border-white/5">
+                                <span class="text-neon font-heading text-sm font-semibold">Primal Movement</span>
+                                <p class="text-gray-500 text-[11px] mt-1">Patrones de movimiento fundamentales con carga progresiva funcional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-item flip-card h-[420px] rounded-xl cursor-pointer" style="transition-delay:0.3s">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <div class="flip-card-front absolute inset-0 rounded-xl overflow-hidden">
+                            <img src="https://picsum.photos/seed/trainer-luna-torres/600/840.jpg" alt="Luna Torres" class="w-full h-full object-cover" style="filter: grayscale(100%) contrast(1.15);">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                <div class="text-neon text-[9px] font-bold tracking-widest uppercase mb-1">Recovery & Mobility</div>
+                                <h3 class="font-heading text-xl font-bold uppercase">Luna Torres</h3>
+                                <p class="text-gray-400 text-xs mt-1">9 años de experiencia</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back absolute inset-0 rounded-xl bg-[#1a1a1a] border border-neon/20 p-6 flex flex-col justify-center">
+                            <div class="text-neon text-[9px] font-bold tracking-widest uppercase mb-3">Luna Torres</div>
+                            <h4 class="font-heading text-lg font-bold uppercase mb-4">Certificaciones</h4>
+                            <ul class="space-y-2 mb-5">
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>RYT-500 Yoga Alliance</li>
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>FRCms — Mobility</li>
+                                <li class="flex items-center gap-2 text-xs text-gray-300"><i data-lucide="award" class="w-3.5 h-3.5 text-neon shrink-0"></i>PPSC — Pain-Free Performance</li>
+                            </ul>
+                            <h4 class="font-heading text-lg font-bold uppercase mb-3">Entrenamiento Signature</h4>
+                            <div class="bg-[#222] rounded-lg p-3 border border-white/5">
+                                <span class="text-neon font-heading text-sm font-semibold">Restore & Flow</span>
+                                <p class="text-gray-500 text-[11px] mt-1">Movilidad articular + yoga restaurativo + liberación miofascial</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MEMBER STORIES ==================== -->
+    <section id="stories" class="relative py-16 md:py-24 bg-[#0a0a0a] overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="reveal-item mb-10 md:mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <div>
+                    <span class="text-neon text-[10px] font-semibold tracking-[0.2em] uppercase">Transformaciones Reales</span>
+                    <h2 class="font-heading text-3xl md:text-5xl font-bold uppercase tracking-tight mt-2">Historias de Miembros</h2>
+                </div>
+                <div class="flex gap-2">
+                    <button id="carouselPrev" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                    <button id="carouselNext" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-container overflow-hidden px-4 md:px-8">
+            <div id="carouselTrack" class="carousel-track flex gap-5 transition-transform duration-500 ease-out">
+                <div class="carousel-slide min-w-[300px] md:min-w-[380px] bg-[#141414] rounded-xl overflow-hidden border border-white/5 shrink-0">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://picsum.photos/seed/member-juan-m/760/560.jpg" alt="Juan M." class="w-full h-full object-cover" style="filter: grayscale(80%) contrast(1.1);">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-neon text-black text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">-25 kg</div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between mb-2"><h4 class="font-heading text-lg font-bold uppercase">Juan M.</h4><span class="text-gray-500 text-[10px]">6 meses</span></div>
+                        <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">Pérdida de Grasa</p>
+                        <p class="text-gray-400 text-xs leading-relaxed italic">"Llegué pesando 105kg y sin energía. El programa de María cambió mi vida. No solo perdí 25kg, gané una comunidad que me empuja cada día."</p>
+                        <div class="flex items-center gap-3 mt-4 pt-4 border-t border-white/5">
+                            <div class="text-center"><div class="text-neon font-heading text-sm font-bold">105</div><div class="text-[9px] text-gray-600">Antes kg</div></div>
+                            <i data-lucide="arrow-right" class="w-3 h-3 text-gray-600"></i>
+                            <div class="text-center"><div class="text-white font-heading text-sm font-bold">80</div><div class="text-[9px] text-gray-600">Ahora kg</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide min-w-[300px] md:min-w-[380px] bg-[#141414] rounded-xl overflow-hidden border border-white/5 shrink-0">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://picsum.photos/seed/member-sara-l/760/560.jpg" alt="Sara L." class="w-full h-full object-cover" style="filter: grayscale(80%) contrast(1.1);">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-neon text-black text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">+12 kg músculo</div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between mb-2"><h4 class="font-heading text-lg font-bold uppercase">Sara L.</h4><span class="text-gray-500 text-[10px]">8 meses</span></div>
+                        <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">Ganancia Muscular</p>
+                        <p class="text-gray-400 text-xs leading-relaxed italic">"Alejandro diseñó mi protocolo desde cero. Pasé de no poder hacer un peso muerto a cargar 100kg. FORGE no es un gimnasio, es una familia."</p>
+                        <div class="flex items-center gap-3 mt-4 pt-4 border-t border-white/5">
+                            <div class="text-center"><div class="text-gray-500 font-heading text-sm font-bold">52</div><div class="text-[9px] text-gray-600">Antes kg</div></div>
+                            <i data-lucide="arrow-right" class="w-3 h-3 text-gray-600"></i>
+                            <div class="text-center"><div class="text-white font-heading text-sm font-bold">64</div><div class="text-[9px] text-gray-600">Ahora kg</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide min-w-[300px] md:min-w-[380px] bg-[#141414] rounded-xl overflow-hidden border border-white/5 shrink-0">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://picsum.photos/seed/member-diego-r/760/560.jpg" alt="Diego R." class="w-full h-full object-cover" style="filter: grayscale(80%) contrast(1.1);">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-neon text-black text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">1er Maratón</div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between mb-2"><h4 class="font-heading text-lg font-bold uppercase">Diego R.</h4><span class="text-gray-500 text-[10px]">10 meses</span></div>
+                        <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">Fitness Integral</p>
+                        <p class="text-gray-400 text-xs leading-relaxed italic">"Nunca imaginé correr un maratón. El programa integral me dio la resistencia física y mental. La comunidad de FORGE fue mi motor en cada kilómetro."</p>
+                        <div class="flex items-center gap-3 mt-4 pt-4 border-t border-white/5">
+                            <div class="text-center"><div class="text-gray-500 font-heading text-sm font-bold">0</div><div class="text-[9px] text-gray-600">Carreras</div></div>
+                            <i data-lucide="arrow-right" class="w-3 h-3 text-gray-600"></i>
+                            <div class="text-center"><div class="text-white font-heading text-sm font-bold">42k</div><div class="text-[9px] text-gray-600">Maratón</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide min-w-[300px] md:min-w-[380px] bg-[#141414] rounded-xl overflow-hidden border border-white/5 shrink-0">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://picsum.photos/seed/member-ana-p/760/560.jpg" alt="Ana P." class="w-full h-full object-cover" style="filter: grayscale(80%) contrast(1.1);">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-neon text-black text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">-18 kg</div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between mb-2"><h4 class="font-heading text-lg font-bold uppercase">Ana P.</h4><span class="text-gray-500 text-[10px]">5 meses</span></div>
+                        <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">Pérdida de Grasa</p>
+                        <p class="text-gray-400 text-xs leading-relaxed italic">"Después de mi segundo embarazo, creí que no volvería a sentirme fuerte. Luna y el equipo me demostraron lo contrario. Estoy en mi mejor versión."</p>
+                        <div class="flex items-center gap-3 mt-4 pt-4 border-t border-white/5">
+                            <div class="text-center"><div class="text-gray-500 font-heading text-sm font-bold">78</div><div class="text-[9px] text-gray-600">Antes kg</div></div>
+                            <i data-lucide="arrow-right" class="w-3 h-3 text-gray-600"></i>
+                            <div class="text-center"><div class="text-white font-heading text-sm font-bold">60</div><div class="text-[9px] text-gray-600">Ahora kg</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide min-w-[300px] md:min-w-[380px] bg-[#141414] rounded-xl overflow-hidden border border-white/5 shrink-0">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://picsum.photos/seed/member-marcos-t/760/560.jpg" alt="Marcos T." class="w-full h-full object-cover" style="filter: grayscale(80%) contrast(1.1);">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-neon text-black text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">+15 kg músculo</div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between mb-2"><h4 class="font-heading text-lg font-bold uppercase">Marcos T.</h4><span class="text-gray-500 text-[10px]">12 meses</span></div>
+                        <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">Ganancia Muscular</p>
+                        <p class="text-gray-400 text-xs leading-relaxed italic">"El PowerForge Protocol es otra liga. En un año transformé mi físico completamente. La periodización y el seguimiento hacen la diferencia real."</p>
+                        <div class="flex items-center gap-3 mt-4 pt-4 border-t border-white/5">
+                            <div class="text-center"><div class="text-gray-500 font-heading text-sm font-bold">65</div><div class="text-[9px] text-gray-600">Antes kg</div></div>
+                            <i data-lucide="arrow-right" class="w-3 h-3 text-gray-600"></i>
+                            <div class="text-center"><div class="text-white font-heading text-sm font-bold">80</div><div class="text-[9px] text-gray-600">Ahora kg</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="carouselDots" class="flex items-center justify-center gap-2 mt-8"></div>
+    </section>
+
+    <!-- ==================== BOOKING CTA ==================== -->
+    <section id="booking" class="relative py-16 md:py-24 bg-[#0e0e0e]">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon/5 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-4 md:px-8 relative">
+            <div class="reveal-item text-center mb-10">
+                <span class="text-neon text-[10px] font-semibold tracking-[0.2em] uppercase">Da el Primer Paso</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold uppercase tracking-tight mt-2">Reserva Tu Clase por WhatsApp</h2>
+                <p class="text-gray-500 text-sm mt-3 max-w-lg mx-auto">Tu primera clase es completamente gratuita. Sin compromisos. Solo tú, tu esfuerzo y nuestro equipo empujándote al límite.</p>
+            </div>
+
+            <form id="bookingForm" class="reveal-item bg-[#141414] rounded-xl p-6 md:p-8 border border-white/5 space-y-5">
+                <div class="grid md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="text-[10px] font-semibold uppercase tracking-widest text-gray-500 mb-1.5 block">Nombre Completo</label>
+                        <input type="text" id="formName" required placeholder="Tu nombre" class="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-neon/50 transition-colors">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-semibold uppercase tracking-widest text-gray-500 mb-1.5 block">Email</label>
+                        <input type="email" id="formEmail" required placeholder="tu@email.com" class="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-neon/50 transition-colors">
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="text-[10px] font-semibold uppercase tracking-widest text-gray-500 mb-1.5 block">Celular</label>
+                        <input type="tel" id="formPhone" required placeholder="+51 999 888 777" class="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-neon/50 transition-colors">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-semibold uppercase tracking-widest text-gray-500 mb-1.5 block">Programa de Interés</label>
+                        <select id="formProgram" class="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-3 text-sm text-gray-400 focus:outline-none focus:border-neon/50 transition-colors appearance-none" style="background-image: url('data:image/svg+xml;utf8,<svg fill=\'%23999\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\'><path d=\'M7 10l5 5 5-5z\'/></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 18px;">
+                            <option value="">Selecciona un programa</option>
+                            <option value="Ganancia Muscular">Ganancia Muscular</option>
+                            <option value="Pérdida de Grasa">Pérdida de Grasa</option>
+                            <option value="Fitness Integral">Fitness Integral</option>
+                            <option value="Entrenamiento Personalizado">Entrenamiento Personalizado</option>
+                            <option value="Preparación Deportiva">Preparación Deportiva</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-[10px] font-semibold uppercase tracking-widest text-gray-500 mb-1.5 block">Cuéntanos tu objetivo</label>
+                    <textarea id="formGoal" rows="3" placeholder="¿Qué quieres lograr?" class="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-neon/50 transition-colors resize-none"></textarea>
+                </div>
+                <button type="submit" class="pulse-cta w-full bg-neon text-black font-heading text-sm font-bold uppercase tracking-widest py-4 rounded-lg hover:bg-neon-glow transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Reservar Mi Clase por WhatsApp
+                </button>
+                <p class="text-center text-gray-600 text-[10px]">Sin compromiso · Cancela cuando quieras · Respuesta en minutos por WhatsApp</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-[#0a0a0a] border-t border-white/5 py-12 md:py-16">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-10">
+                <div>
+                    <a href="#" class="font-heading text-2xl font-bold tracking-widest text-neon">FORGE</a>
+                    <p class="text-gray-500 text-xs leading-relaxed mt-3">Elite Fitness Studio. Entrenamiento de alto rendimiento con comunidad y ciencia.</p>
+                    <div class="flex gap-3 mt-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-neon/20 transition-colors"><i data-lucide="instagram" class="w-3.5 h-3.5 text-gray-400"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-neon/20 transition-colors"><i data-lucide="youtube" class="w-3.5 h-3.5 text-gray-400"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-neon/20 transition-colors"><i data-lucide="twitter" class="w-3.5 h-3.5 text-gray-400"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-heading text-xs font-bold uppercase tracking-widest mb-4">Programas</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#programs" class="text-gray-500 text-xs hover:text-white transition-colors">Ganancia Muscular</a></li>
+                        <li><a href="#programs" class="text-gray-500 text-xs hover:text-white transition-colors">Pérdida de Grasa</a></li>
+                        <li><a href="#programs" class="text-gray-500 text-xs hover:text-white transition-colors">Fitness Integral</a></li>
+                        <li><a href="#programs" class="text-gray-500 text-xs hover:text-white transition-colors">Entrenamiento Personalizado</a></li>
+                        <li><a href="#programs" class="text-gray-500 text-xs hover:text-white transition-colors">Preparación Deportiva</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading text-xs font-bold uppercase tracking-widest mb-4">Estudio</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#trainers" class="text-gray-500 text-xs hover:text-white transition-colors">Entrenadores</a></li>
+                        <li><a href="#stories" class="text-gray-500 text-xs hover:text-white transition-colors">Historias</a></li>
+                        <li><a href="#" class="text-gray-500 text-xs hover:text-white transition-colors">Horarios</a></li>
+                        <li><a href="#" class="text-gray-500 text-xs hover:text-white transition-colors">Instalaciones</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading text-xs font-bold uppercase tracking-widest mb-4">Contacto</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-500 text-xs flex items-center gap-2"><i data-lucide="map-pin" class="w-3 h-3 text-neon shrink-0"></i>Av. Larco 820, Miraflores, Lima</li>
+                        <li class="text-gray-500 text-xs flex items-center gap-2"><i data-lucide="phone" class="w-3 h-3 text-neon shrink-0"></i>+51 999 888 777</li>
+                        <li class="text-gray-500 text-xs flex items-center gap-2"><i data-lucide="mail" class="w-3 h-3 text-neon shrink-0"></i>hola@forgefitness.pe</li>
+                        <li class="text-gray-500 text-xs flex items-center gap-2"><i data-lucide="clock" class="w-3 h-3 text-neon shrink-0"></i>Lun-Vie 6:00-22:00</li>
+                        <li class="text-gray-500 text-xs flex items-center gap-2"><i data-lucide="clock" class="w-3 h-3 text-neon shrink-0"></i>Sáb-Dom 7:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
+                <p class="text-gray-600 text-[10px]">© 2025 FORGE Fitness Studio. Todos los derechos reservados.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-600 text-[10px] hover:text-white transition-colors">Privacidad</a>
+                    <a href="#" class="text-gray-600 text-[10px] hover:text-white transition-colors">Términos</a>
+                    <a href="#" class="text-gray-600 text-[10px] hover:text-white transition-colors">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== STICKY BOTTOM BAR ==================== -->
+    <div id="stickyBar" class="fixed bottom-0 left-0 right-0 z-50 bg-[#111]/95 backdrop-blur-md border-t border-white/5 py-3 px-4 transform translate-y-full transition-transform duration-500">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="hidden sm:flex items-center gap-3">
+                <span class="font-heading text-sm font-bold uppercase tracking-wider text-white">FORGE</span>
+                <span class="text-gray-500 text-[10px]">Tu primera clase es gratis</span>
+            </div>
+            <a href="#booking" class="pulse-cta bg-neon text-black font-heading text-xs font-bold uppercase tracking-wider px-6 py-3 rounded hover:bg-neon-glow transition-colors mx-auto sm:mx-0 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Reservar por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST ==================== -->
+    <div id="toast" class="toast fixed bottom-20 left-1/2 -translate-x-1/2 z-[200] bg-[#25D366] text-white font-heading text-sm font-bold uppercase tracking-wider px-6 py-3 rounded-lg shadow-lg flex items-center gap-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        ¡Abriendo WhatsApp!
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        lucide.createIcons();
+
+        // ---- Grain Texture Generator ----
+        (function createGrain() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 200;
+            canvas.height = 200;
+            const ctx = canvas.getContext('2d');
+            const imageData = ctx.createImageData(200, 200);
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                const v = Math.random() * 255;
+                imageData.data[i] = v;
+                imageData.data[i+1] = v;
+                imageData.data[i+2] = v;
+                imageData.data[i+3] = 18;
+            }
+            ctx.putImageData(imageData, 0, 0);
+            document.getElementById('grainOverlay').style.backgroundImage = `url(${canvas.toDataURL()})`;
+        })();
+
+        // ---- Grain Parallax ----
+        const grainOverlay = document.getElementById('grainOverlay');
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    grainOverlay.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // ---- Mobile Menu ----
+        const mobileMenu = document.getElementById('mobileMenu');
+        document.getElementById('menuBtn').addEventListener('click', () => mobileMenu.classList.add('mobile-menu-open'));
+        document.getElementById('closeMenuBtn').addEventListener('click', () => mobileMenu.classList.remove('mobile-menu-open'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('mobile-menu-open'));
+        });
+
+        // ---- Scroll Reveal ----
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal-item').forEach(el => revealObserver.observe(el));
+
+        // ---- Stats Counter Animation ----
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.count);
+                    const duration = 2000;
+                    const start = performance.now();
+                    function animate(now) {
+                        const progress = Math.min((now - start) / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        const current = Math.floor(eased * target);
+                        el.textContent = target >= 1000 ? current.toLocaleString('es-PE') + '+' : current + (el.closest('.reveal-item')?.querySelector('.text-gray-500')?.textContent.includes('%') ? '%' : '+');
+                        if (progress < 1) requestAnimationFrame(animate);
+                    }
+                    requestAnimationFrame(animate);
+                    countObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+        // ---- Sticky Bottom Bar ----
+        const stickyBar = document.getElementById('stickyBar');
+        const heroSection = document.getElementById('hero');
+        const stickyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) stickyBar.classList.add('translate-y-full');
+                else stickyBar.classList.remove('translate-y-full');
+            });
+        }, { threshold: 0.05 });
+        stickyObserver.observe(heroSection);
+
+        // ---- Carousel ----
+        const track = document.getElementById('carouselTrack');
+        const slides = [...track.querySelectorAll('.carousel-slide')];
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        const dotsContainer = document.getElementById('carouselDots');
+
+        let currentIndex = 0, isDragging = false, startX = 0, currentTranslate = 0, prevTranslate = 0, autoPlayTimer = null, slideWidth = 0, maxIndex = 0;
+
+        function calculateDimensions() {
+            const gap = 20;
+            if (slides.length > 0) {
+                slideWidth = slides[0].offsetWidth + gap;
+                const containerWidth = track.parentElement.offsetWidth;
+                const visibleSlides = Math.floor(containerWidth / slideWidth);
+                maxIndex = Math.max(0, slides.length - visibleSlides);
+                if (currentIndex > maxIndex) currentIndex = maxIndex;
+            }
+            updatePosition(false);
+            renderDots();
+        }
+
+        function updatePosition(animate = true) {
+            currentTranslate = -currentIndex * slideWidth;
+            prevTranslate = currentTranslate;
+            track.style.transition = animate ? 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none';
+            track.style.transform = `translateX(${currentTranslate}px)`;
+            updateDots();
+        }
+
+        function renderDots() {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i <= maxIndex; i++) {
+                const dot = document.createElement('button');
+                dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-neon w-6' : 'bg-white/20'}`;
+                dot.addEventListener('click', () => { currentIndex = i; updatePosition(); resetAutoPlay(); });
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            dotsContainer.querySelectorAll('button').forEach((dot, i) => {
+                dot.className = `h-2 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-neon w-6' : 'bg-white/20 w-2'}`;
+            });
+        }
+
+        function nextSlide() { currentIndex = Math.min(currentIndex + 1, maxIndex); updatePosition(); }
+        function prevSlide() { currentIndex = Math.max(currentIndex - 1, 0); updatePosition(); }
+        prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+        nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+
+        function getPositionX(e) { return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX; }
+
+        function dragStart(e) { isDragging = true; startX = getPositionX(e); track.style.transition = 'none'; clearInterval(autoPlayTimer); }
+        function dragMove(e) {
+            if (!isDragging) return;
+            const currentX = getPositionX(e);
+            let diff = currentX - startX;
+            const minTranslate = -maxIndex * slideWidth;
+            if (prevTranslate + diff > 0) diff = diff * 0.25;
+            else if (prevTranslate + diff < minTranslate) { const overflow = (prevTranslate + diff) - minTranslate; diff = diff - overflow * 0.75; }
+            currentTranslate = prevTranslate + diff;
+            track.style.transform = `translateX(${currentTranslate}px)`;
+        }
+        function dragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            const movedBy = currentTranslate - prevTranslate;
+            if (Math.abs(movedBy) > slideWidth * 0.2) { if (movedBy < 0 && currentIndex < maxIndex) currentIndex++; else if (movedBy > 0 && currentIndex > 0) currentIndex--; }
+            updatePosition(); resetAutoPlay();
+        }
+
+        track.addEventListener('mousedown', dragStart);
+        track.addEventListener('mousemove', dragMove);
+        track.addEventListener('mouseup', dragEnd);
+        track.addEventListener('mouseleave', () => { if (isDragging) dragEnd(); });
+        track.addEventListener('touchstart', dragStart, { passive: true });
+        track.addEventListener('touchmove', dragMove, { passive: true });
+        track.addEventListener('touchend', dragEnd);
+        track.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', e => e.preventDefault()));
+
+        function resetAutoPlay() { clearInterval(autoPlayTimer); autoPlayTimer = setInterval(() => { if (currentIndex >= maxIndex) currentIndex = -1; nextSlide(); }, 5000); }
+        calculateDimensions(); resetAutoPlay();
+        window.addEventListener('resize', calculateDimensions);
+
+        // ---- Flip Cards on Mobile ----
+        if ('ontouchstart' in window) document.querySelectorAll('.flip-card').forEach(card => { card.addEventListener('click', () => card.classList.toggle('flipped')); });
+
+        // ---- WhatsApp Form Submission ----
+        const WHATSAPP_NUMBER = '51999888777';
+
+        document.getElementById('bookingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('formName').value.trim();
+            const email = document.getElementById('formEmail').value.trim();
+            const phone = document.getElementById('formPhone').value.trim();
+            const program = document.getElementById('formProgram').value;
+            const goal = document.getElementById('formGoal').value.trim();
+
+            let message = `🏋️ *NUEVA RESERVA — FORGE FITNESS*\n\n`;
+            message += `👤 *Nombre:* ${name}\n`;
+            message += `📧 *Email:* ${email}\n`;
+            message += `📱 *Celular:* ${phone}\n`;
+            message += `📋 *Programa:* ${program || 'No especificado'}\n`;
+            if (goal) message += `🎯 *Objetivo:* ${goal}\n`;
+            message += `\n¡Hola! Quiero reservar mi clase de prueba gratuita. 💪`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => { window.open(whatsappURL, '_blank'); }, 500);
+        });
+
+        // ---- Nav background on scroll ----
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { nav.classList.add('bg-[#0a0a0a]/95'); nav.classList.remove('bg-[#0a0a0a]/90'); }
+            else { nav.classList.remove('bg-[#0a0a0a]/95'); nav.classList.add('bg-[#0a0a0a]/90'); }
+        });
+
+    });
+    </script>
+</body>
+</html>
